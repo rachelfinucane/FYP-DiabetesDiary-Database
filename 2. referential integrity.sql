@@ -1,6 +1,13 @@
 ---------------------
 -- Federated Users --
 ---------------------
+-- Foreign Key: User
+ALTER TABLE dbo.FederatedCredentials
+   ADD CONSTRAINT FederatedCredentials_Users FOREIGN KEY (userId)
+      REFERENCES dbo.Users (userId)
+      ON DELETE CASCADE
+      ON UPDATE CASCADE
+;
 
 ---------------
 -- Log Table --

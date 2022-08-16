@@ -84,8 +84,9 @@ CREATE TABLE Meal
     mealId UNIQUEIDENTIFIER NOT NULL DEFAULT newid(),
     recipeId UNIQUEIDENTIFIER,
     totalCarbs DECIMAL (7,3),
+    mealName VARCHAR (100),
     -- in grams, allow up to 10kg/ 10,000g
-    Weight DECIMAL (7,2),
+    mealWeight DECIMAL (7,2),
     CONSTRAINT PK_Meal_MealId PRIMARY KEY CLUSTERED (mealId) 
 );
 GO
@@ -94,7 +95,7 @@ IF OBJECT_ID(N'dbo.BloodSugar', N'U') IS NULL
 CREATE TABLE BloodSugar
 (
     bloodSugarId UNIQUEIDENTIFIER NOT NULL DEFAULT newid(),
-    Value DECIMAL(4,1),
+    Value DECIMAL(4,1) NOT NULL,
     CONSTRAINT PK_BloodSugar_BloodSugarId PRIMARY KEY CLUSTERED (bloodSugarId) 
 );
 GO

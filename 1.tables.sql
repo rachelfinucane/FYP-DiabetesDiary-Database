@@ -71,7 +71,8 @@ CREATE TABLE Log
     logId UNIQUEIDENTIFIER NOT NULL DEFAULT newid(),
     userId UNIQUEIDENTIFIER NOT NULL,
     bloodSugarID UNIQUEIDENTIFIER,
-    insulinListID UNIQUEIDENTIFIER,
+    -- insulinListID UNIQUEIDENTIFIER,
+    insulinTakenId UNIQUEIDENTIFIER,
     mealID UNIQUEIDENTIFIER,
     logTime SMALLDATETIME,
     CONSTRAINT PK_Log_LogId PRIMARY KEY CLUSTERED (logId) 
@@ -100,29 +101,33 @@ CREATE TABLE BloodSugar
 );
 GO
 
-IF OBJECT_ID(N'dbo.InsulinList', N'U') IS NULL
-CREATE TABLE InsulinList
-(
-    logId UNIQUEIDENTIFIER NOT NULL,
-    insulinTypeId UNIQUEIDENTIFIER NOT NULL,
-    CONSTRAINT PK_InsulinList_LogId_InsulinId PRIMARY KEY CLUSTERED (logId, insulinTypeId) 
-);
-GO
+-- IF OBJECT_ID(N'dbo.InsulinList', N'U') IS NULL
+-- CREATE TABLE InsulinList
+-- (
+--     logId UNIQUEIDENTIFIER NOT NULL,
+--     insulinTypeId UNIQUEIDENTIFIER NOT NULL,
+--     CONSTRAINT PK_InsulinList_LogId_InsulinId PRIMARY KEY CLUSTERED (logId, insulinTypeId) 
+-- );
+-- GO
 
 IF OBJECT_ID(N'dbo.InsulinTaken', N'U') IS NULL
 CREATE TABLE InsulinTaken
 (
-    insulinTypeId UNIQUEIDENTIFIER NOT NULL,
-    units DECIMAL(7, 4),
-    CONSTRAINT PK_InsulinTaken_InsulinTypeID PRIMARY KEY CLUSTERED (insulinTypeID) 
+    -- insulinTypeId UNIQUEIDENTIFIER NOT NULL,
+    -- units DECIMAL(7, 4),
+    -- CONSTRAINT PK_InsulinTaken_InsulinTypeID PRIMARY KEY CLUSTERED (insulinTypeID) 
+    insulinTakenId UNIQUEIDENTIFIER PRIMARY KEY DEFAULT newid(),
+    units DECIMAL(7,4) NOT NULL,
+    type VARCHAR(100) NOT NULL
+
 );
 GO
 
-IF OBJECT_ID(N'dbo.Insulin', N'U') IS NULL
-CREATE TABLE Insulin
-(
-    insulinTypeID UNIQUEIDENTIFIER NOT NULL DEFAULT newid(),
-    insulinType VARCHAR (100),
-    CONSTRAINT PK_Insulin_InsulinTypeID PRIMARY KEY CLUSTERED (insulinTypeID) 
-);
-GO
+-- IF OBJECT_ID(N'dbo.Insulin', N'U') IS NULL
+-- CREATE TABLE Insulin
+-- (
+--     insulinTypeID UNIQUEIDENTIFIER NOT NULL DEFAULT newid(),
+--     insulinType VARCHAR (100),
+--     CONSTRAINT PK_Insulin_InsulinTypeID PRIMARY KEY CLUSTERED (insulinTypeID) 
+-- );
+-- GO

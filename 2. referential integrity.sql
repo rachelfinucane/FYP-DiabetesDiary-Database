@@ -37,6 +37,14 @@ ALTER TABLE dbo.Log
 --       ON UPDATE CASCADE
 -- ;
 
+-- Foreign Key: InsulinTaken
+ALTER TABLE dbo.Log
+   ADD CONSTRAINT FK_Log_InsulinTaken FOREIGN KEY (insulinTakenId)
+      REFERENCES dbo.InsulinTaken (insulinTakenId)
+      ON DELETE CASCADE
+      ON UPDATE CASCADE
+;
+
 -- Foreign Key: BloodSugar
 ALTER TABLE dbo.Log
    ADD CONSTRAINT FK_Log_BloodSugar FOREIGN KEY (bloodSugarId)
@@ -75,24 +83,24 @@ ALTER TABLE dbo.IngredientList
 -- Insulin Taken --
 ------------------
 
-ALTER TABLE dbo.InsulinTaken
-   ADD CONSTRAINT FK_InsulinTaken_InsulinType FOREIGN KEY (insulinTypeId)
-      REFERENCES dbo.Insulin (insulinTypeId)
-      ON DELETE CASCADE
-      ON UPDATE CASCADE
+-- ALTER TABLE dbo.InsulinTaken
+--    ADD CONSTRAINT FK_InsulinTaken_InsulinType FOREIGN KEY (insulinTypeId)
+--       REFERENCES dbo.Insulin (insulinTypeId)
+--       ON DELETE CASCADE
+--       ON UPDATE CASCADE
 
-------------------
--- Insulin List --
-------------------
+-- ------------------
+-- -- Insulin List --
+-- ------------------
 
-ALTER TABLE dbo.InsulinList
-   ADD CONSTRAINT FK_InsulinList_Log FOREIGN KEY (logId)
-      REFERENCES dbo.Log (logId)
-      ON DELETE CASCADE
-      ON UPDATE CASCADE
+-- ALTER TABLE dbo.InsulinList
+--    ADD CONSTRAINT FK_InsulinList_Log FOREIGN KEY (logId)
+--       REFERENCES dbo.Log (logId)
+--       ON DELETE CASCADE
+--       ON UPDATE CASCADE
 
-ALTER TABLE dbo.InsulinList
-   ADD CONSTRAINT FK_InsulinList_InsulinTaken FOREIGN KEY (insulinTypeId)
-      REFERENCES dbo.InsulinTaken (insulinTypeId)
-      ON DELETE CASCADE
-      ON UPDATE CASCADE
+-- ALTER TABLE dbo.InsulinList
+--    ADD CONSTRAINT FK_InsulinList_InsulinTaken FOREIGN KEY (insulinTypeId)
+--       REFERENCES dbo.InsulinTaken (insulinTypeId)
+--       ON DELETE CASCADE
+--       ON UPDATE CASCADE

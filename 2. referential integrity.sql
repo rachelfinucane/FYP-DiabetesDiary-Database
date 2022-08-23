@@ -78,6 +78,13 @@ ALTER TABLE dbo.IngredientList
       REFERENCES dbo.Ingredient (ingredientId)
       ON DELETE CASCADE
       ON UPDATE CASCADE
+
+------------------
+-- Recipe       --
+------------------
+ALTER TABLE dbo.Recipe
+   ADD CONSTRAINT FK_Recipe_Users FOREIGN KEY (userId)
+      REFERENCES dbo.Users (userId)
       
 ------------------
 -- Insulin Taken --

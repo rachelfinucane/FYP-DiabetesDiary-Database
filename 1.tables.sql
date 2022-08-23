@@ -33,7 +33,7 @@ IF OBJECT_ID(N'dbo.FederatedCredentials', N'U') IS NULL
     provider VARCHAR(100) NOT NULL,
     subject VARCHAR (1000) NOT NULL,
     CONSTRAINT PK_FederaredCredentials_UserId PRIMARY KEY CLUSTERED (federatedCredentialId),
-    CONSTRAINT AK_Provider_Subject UNIQUE(Provider, Subject)  
+    CONSTRAINT AK_Provider_Subject UNIQUE(Provider, Subject)
 );
 GO
 
@@ -41,7 +41,14 @@ IF OBJECT_ID(N'dbo.Recipe', N'U') IS NULL
     CREATE TABLE Recipe
 (
     recipeId UNIQUEIDENTIFIER NOT NULL DEFAULT newid(),
+    userId UNIQUEIDENTIFIER NOT NULL,
     recipeSource VARCHAR (100),
+    carbsPerServing DECIMAL (7,2),
+    totalCarbs DECIMAL (7,2),
+    recipeType VARCHAR (100),
+    recipeInstructions VARCHAR(8000),
+    recipeYields TINYINT,
+    recipeName VARCHAR (500),
     CONSTRAINT PK_Recipe_RecipeId PRIMARY KEY CLUSTERED (recipeId)
 );
 GO
@@ -51,8 +58,11 @@ CREATE TABLE Ingredient
 (
     ingredientId UNIQUEIDENTIFIER NOT NULL DEFAULT newid(),
     ingredientName VARCHAR (100),
+    ingredientAmount DECIMAL(7,2),
+    ingredientUnit VARCHAR(50),
+    apiFoodName VARCHAR(500),
     carbs DECIMAL(7,2) -- in grams, allow up to 10kg/ 10,000g,
-    CONSTRAINT PK_Ingredient_IngredientId PRIMARY KEY CLUSTERED (ingredientId)
+        CONSTRAINT PK_Ingredient_IngredientId PRIMARY KEY CLUSTERED (ingredientId)
 );
 GO
 
@@ -75,7 +85,7 @@ CREATE TABLE Log
     insulinTakenId UNIQUEIDENTIFIER,
     mealID UNIQUEIDENTIFIER,
     logTime SMALLDATETIME,
-    CONSTRAINT PK_Log_LogId PRIMARY KEY CLUSTERED (logId) 
+    CONSTRAINT PK_Log_LogId PRIMARY KEY CLUSTERED (logId)
 );
 GO
 
@@ -84,11 +94,11 @@ CREATE TABLE Meal
 (
     mealId UNIQUEIDENTIFIER NOT NULL DEFAULT newid(),
     recipeId UNIQUEIDENTIFIER,
-    totalCarbs DECIMAL (7,3),
+    totalCarbs DECIMAL (7,2),
     mealName VARCHAR (100),
     -- in grams, allow up to 10kg/ 10,000g
     mealWeight DECIMAL (7,2),
-    CONSTRAINT PK_Meal_MealId PRIMARY KEY CLUSTERED (mealId) 
+    CONSTRAINT PK_Meal_MealId PRIMARY KEY CLUSTERED (mealId)
 );
 GO
 
@@ -96,8 +106,8 @@ IF OBJECT_ID(N'dbo.BloodSugar', N'U') IS NULL
 CREATE TABLE BloodSugar
 (
     bloodSugarId UNIQUEIDENTIFIER NOT NULL DEFAULT newid(),
-    Value DECIMAL(4,1) NOT NULL,
-    CONSTRAINT PK_BloodSugar_BloodSugarId PRIMARY KEY CLUSTERED (bloodSugarId) 
+    Value TINYINT NOT NULL,
+    CONSTRAINT PK_BloodSugar_BloodSugarId PRIMARY KEY CLUSTERED (bloodSugarId)
 );
 GO
 

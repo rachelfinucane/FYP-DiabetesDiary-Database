@@ -96,8 +96,7 @@ CREATE TABLE Meal
     recipeId UNIQUEIDENTIFIER,
     totalCarbs DECIMAL (7,2),
     mealName VARCHAR (100),
-    -- in grams, allow up to 10kg/ 10,000g
-    mealWeight DECIMAL (7,2),
+    recipeServings TINYINT,
     CONSTRAINT PK_Meal_MealId PRIMARY KEY CLUSTERED (mealId)
 );
 GO

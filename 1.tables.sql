@@ -45,10 +45,11 @@ IF OBJECT_ID(N'dbo.Recipe', N'U') IS NULL
     recipeSource VARCHAR (100),
     carbsPerServing DECIMAL (7,2),
     totalCarbs DECIMAL (7,2),
-    recipeType VARCHAR (100),
+    recipeType VARCHAR (100) CHECK ([recipeType] IN('manually calculated', 'included with recipe','user added')),
     recipeInstructions VARCHAR(8000),
     recipeYields TINYINT,
     recipeName VARCHAR (500),
+    recipeImageUrl VARCHAR(1000),
     CONSTRAINT PK_Recipe_RecipeId PRIMARY KEY CLUSTERED (recipeId)
 );
 GO
